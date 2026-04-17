@@ -12,6 +12,7 @@ interface Props {
 
 export const usePokemon = ({ id }: Props) => {
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const getPokemonById = async (id: number) => {
     const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
@@ -22,6 +23,8 @@ export const usePokemon = ({ id }: Props) => {
       name: data.name,
       imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}`,
     });
+
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -30,7 +33,9 @@ export const usePokemon = ({ id }: Props) => {
 
   return {
     // Props
+    isLoading,
     pokemon,
+    formattedId: id.toString().padStart(3, "0"),
     // Methods
   };
 };

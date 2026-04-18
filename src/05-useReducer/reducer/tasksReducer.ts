@@ -25,6 +25,15 @@ export type TaskAction =
       payload: number;
     };
 
+export const getTasksInitialState = () => {
+  return {
+    todos: [],
+    completed: 0,
+    pending: 0,
+    length: 0,
+  };
+};
+
 export const tasksReducer = (
   state: TaskState,
   action: TaskAction,
